@@ -1,7 +1,124 @@
 /*
  * Script principal pour le site de la Bat‑Mitzvah de Naomi.
  *
- *  – Chargement des inscriptions depuis le stockage local du navigateur
+ *  – Chargement des inscriptions de      // Ne pas empêcher l'envoi du form      // Ne pas empêcher l'envoi du form      // Ne pas empêcher l'envoi du formulaire : l'action POST est
+      // nécessaire pour transmettre les données à Formsubmit.
+      // Laisser le navigateur poursuivre le processus d'envoi.
+    });
+  }
+
+  // Contrôle de la musique de fond
+  const audioButton = document.getElementById('audio-toggle');
+  const youtubePlayer = document.getElementById('youtube-player');
+  let isMuted = true; // La vidéo démarre en muet par défaut
+
+  if (audioButton && youtubePlayer) {
+    audioButton.addEventListener('click', () => {
+      if (isMuted) {
+        // Activer le son - remplacer l'URL pour enlever mute=1
+        const currentSrc = youtubePlayer.src;
+        const newSrc = currentSrc.replace('mute=1', 'mute=0');
+        youtubePlayer.src = newSrc;
+        
+        // Changer l'icône pour montrer que le son est activé
+        audioButton.querySelector('.speaker-icon').textContent = '🔊';
+        isMuted = false;
+      } else {
+        // Désactiver le son - remettre mute=1
+        const currentSrc = youtubePlayer.src;
+        const newSrc = currentSrc.replace('mute=0', 'mute=1');
+        youtubePlayer.src = newSrc;
+        
+        // Changer l'icône pour montrer que le son est coupé
+        audioButton.querySelector('.speaker-icon').textContent = '🔇';
+        isMuted = true;
+      }
+    });
+
+    // Initialiser l'état visuel du bouton (muet au démarrage)
+    audioButton.querySelector('.speaker-icon').textContent = '🔇';
+  }
+}); : l'action POST est
+      // nécessaire pour transmettre les données à Formsubmit.
+      // Laisser le navigateur poursuivre le processus d'envoi.
+    });
+  }
+
+  // Contrôle de la musique de fond
+  const audioButton = document.getElementById('audio-toggle');
+  const youtubePlayer = document.getElementById('youtube-player');
+  let isMuted = true; // La vidéo démarre en muet par défaut
+
+  if (audioButton && youtubePlayer) {
+    audioButton.addEventListener('click', () => {
+      if (isMuted) {
+        // Activer le son - remplacer l'URL pour enlever mute=1
+        const currentSrc = youtubePlayer.src;
+        const newSrc = currentSrc.replace('mute=1', 'mute=0');
+        youtubePlayer.src = newSrc;
+        
+        // Changer l'icône pour montrer que le son est activé
+        audioButton.querySelector('.speaker-icon').textContent = '🔊';
+        audioButton.classList.remove('muted');
+        isMuted = false;
+      } else {
+        // Désactiver le son - remettre mute=1
+        const currentSrc = youtubePlayer.src;
+        const newSrc = currentSrc.replace('mute=0', 'mute=1');
+        youtubePlayer.src = newSrc;
+        
+        // Changer l'icône pour montrer que le son est coupé
+        audioButton.querySelector('.speaker-icon').textContent = '🔇';
+        audioButton.classList.add('muted');
+        isMuted = true;
+      }
+    });
+
+    // Initialiser l'état visuel du bouton (muet au démarrage)
+    audioButton.querySelector('.speaker-icon').textContent = '🔇';
+    audioButton.classList.add('muted');
+  }
+}); : l'action POST est
+      // nécessaire pour transmettre les données à Formsubmit.
+      // Laisser le navigateur poursuivre le processus d'envoi.
+    });
+  }
+
+  // Contrôle de la musique de fond
+  const audioButton = document.getElementById('audio-toggle');
+  const youtubePlayer = document.getElementById('youtube-player');
+  let isMuted = true; // La vidéo démarre en muet par défaut
+
+  if (audioButton && youtubePlayer) {
+    audioButton.addEventListener('click', () => {
+      if (isMuted) {
+        // Activer le son - remplacer l'URL pour enlever mute=1
+        const currentSrc = youtubePlayer.src;
+        const newSrc = currentSrc.replace('mute=1', 'mute=0');
+        youtubePlayer.src = newSrc;
+        
+        // Changer l'icône pour montrer que le son est activé
+        audioButton.querySelector('.speaker-icon').textContent = '🔊';
+        audioButton.classList.remove('muted');
+        isMuted = false;
+      } else {
+        // Désactiver le son - remettre mute=1
+        const currentSrc = youtubePlayer.src;
+        const newSrc = currentSrc.replace('mute=0', 'mute=1');
+        youtubePlayer.src = newSrc;
+        
+        // Changer l'icône pour montrer que le son est coupé
+        audioButton.querySelector('.speaker-icon').textContent = '🔇';
+        audioButton.classList.add('muted');
+        isMuted = true;
+      }
+    });
+
+    // Initialiser l'état visuel du bouton
+    audioButton.querySelector('.speaker-icon').textContent = '🔇';
+    audioButton.classList.add('muted');
+  }
+});e stockage local du navigateur
  *    et affichage dans le tableau de bord.
  *  – À la soumission du formulaire, enregistrement d’une nouvelle
  *    entrée dans le tableau local avant l’envoi des données par

@@ -13,7 +13,7 @@
   --primary-color: #8e44ad; /* teinte violette principale */
   --secondary-color: #f5eaf7; /* nuance claire pour les contrastes */
   --text-color: #333333;
-  --overlay-color: rgba(142, 68, 173, 0.55); /* voile semi‑transparent */
+  --overlay-color: rgba(142, 68, 173, 0.7); /* voile semi‑transparent - 50% plus transparent */
   --accent-color: #c39b37; /* couleur dorée pour les accents */
 }
 
@@ -25,7 +25,7 @@ body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   color: var(--text-color);
-  background-image: url('photo_naomi.jpeg');
+  background-image: url('magen_naomi.png');/*photo_naomi.jpeg*/
   background-size: cover;
   background-position: center;
   min-height: 100vh;
@@ -258,7 +258,7 @@ footer {
 }
 
 .landing-panel {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 10px;
   padding: 2rem 2.5rem;
   text-align: center;
@@ -266,11 +266,13 @@ footer {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.landing-panel .name-title {
-  font-family: 'Great Vibes', cursive;
-  font-size: 3rem;
-  margin: 0;
-  color: var(--accent-color);
+.landing-panel .name-image {
+  width: 200px;
+  height: auto;
+  margin: 0 auto 1rem;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .landing-panel .invitation-title {
@@ -321,4 +323,50 @@ footer {
 
 .cta-button:hover {
   background-color: #732d91;
+}
+
+/* Bouton de contrôle audio */
+.audio-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(142, 68, 173, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.audio-button:hover {
+  background-color: #732d91;
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(142, 68, 173, 0.4);
+}
+
+.audio-button .speaker-icon {
+  font-size: 24px;
+  color: white;
+  user-select: none;
+}
+
+/* Texte hébreu בס"ד */
+.hebrew-text {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--primary-color);
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 8px 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
