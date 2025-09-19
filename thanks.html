@@ -5,10 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merci ! - Bat‑Mitzvah de Naomi</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styles pour les paillettes */
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            animation: confetti-fall linear infinite;
+        }
+
+        .confetti::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 4px;
+            border-radius: 2px;
+            animation: confetti-spin linear infinite;
+            transform-origin: center;
+        }
+
+        @keyframes confetti-fall {
+            from {
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh) translateX(var(--drift)) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes confetti-spin {
+            from {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+            to {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+
+        /* Masquer le lecteur YouTube */
+        #youtube-player {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+        }
+
+        /* Animation spéciale pour le titre */
+        .thanks-container h1 {
+            animation: celebrate 2s ease-in-out infinite alternate;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes celebrate {
+            0% {
+                transform: scale(1) rotate(-1deg);
+                color: var(--primary-color);
+            }
+            100% {
+                transform: scale(1.05) rotate(1deg);
+                color: #e74c3c;
+            }
+        }
+
+        /* Amélioration visuelle */
+        .thanks-container {
+            position: relative;
+            z-index: 5;
+        }
+    </style>
 </head>
 <body>
     <!-- Texte hébreu en haut à droite -->
     <div class="hebrew-text">בס"ד</div>
+    
+    <!-- Conteneur pour les paillettes -->
+    <div id="confetti-container"></div>
+    
+    <!-- Lecteur YouTube invisible -->
+    <div id="youtube-player"></div>
     
     <div class="overlay"></div>
     <main class="thanks-container">
@@ -18,6 +94,142 @@
         <a href="index.html">Retour à l'accueil</a>
     </main>
     
+    <!-- API YouTube -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        let player;
+        let confettiInterval;
+
+        // Initialisation du lecteur YouTube
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '1',
+                width: '1',
+                videoId: 'm-8JfR9_LFA', // ID extrait de l'URL YouTube
+                playerVars: {
+                    'autoplay': 1,
+                    'loop': 1,
+                    'playlist': 'm-8JfR9_LFA',
+                    'controls': 0,
+                    'mute': 0, // Pas en sourdine
+                    'start': 0
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            console.log('Lecteur YouTube prêt');
+            // S'assurer que le son n'est pas coupé
+            event.target.unMute();
+            event.target.setVolume(50); // Volume à 50%
+            event.target.playVideo();
+            
+            // Forcer le démarrage après un petit délai
+            setTimeout(() => {
+                event.target.playVideo();
+            }, 1000);
+        }
+
+        function onPlayerStateChange(event) {
+            console.log('État du lecteur:', event.data);
+            // Redémarre la vidéo quand elle se termine
+            if (event.data === YT.PlayerState.ENDED) {
+                player.seekTo(0);
+                player.playVideo();
+            }
+        }
+
+        // Fonction pour créer les paillettes
+        function createConfetti() {
+            const colors = [
+                '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', 
+                '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9',
+                '#F8C471', '#82E0AA', '#F1948A', '#85C1E9', '#D7DBDD',
+                '#FFD93D', '#6BCF7F', '#4D96FF', '#9B59B6', '#E67E22'
+            ];
+            
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            
+            // Position de départ en haut de la page sur toute la largeur
+            const startX = Math.random() * window.innerWidth;
+            const startY = -20; // Juste au-dessus du haut de la page
+            
+            confetti.style.left = startX + 'px';
+            confetti.style.top = startY + 'px';
+            
+            // Couleur aléatoire
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Durée d'animation aléatoire
+            const duration = Math.random() * 2 + 3; // Entre 3 et 5 secondes
+            confetti.style.animationDuration = duration + 's';
+            
+            // Taille aléatoire (forme rectangulaire)
+            const width = Math.random() * 8 + 8; // Entre 8 et 16px
+            const height = Math.random() * 3 + 3; // Entre 3 et 6px
+            
+            // Dérive horizontale aléatoire (mouvement de balancier)
+            const drift = (Math.random() - 0.5) * 200; // Entre -100px et +100px
+            confetti.style.setProperty('--drift', drift + 'px');
+            
+            // Applique la couleur et les dimensions
+            confetti.innerHTML = `<style>
+                .confetti::before {
+                    background-color: ${color};
+                    width: ${width}px;
+                    height: ${height}px;
+                    animation-duration: ${duration * 0.3}s;
+                    box-shadow: 0 0 6px ${color}40;
+                }
+            </style>`;
+            
+            document.getElementById('confetti-container').appendChild(confetti);
+            
+            // Supprime la paillette après l'animation
+            setTimeout(() => {
+                if (confetti.parentNode) {
+                    confetti.parentNode.removeChild(confetti);
+                }
+            }, duration * 1000);
+        }
+
+        // Démarre les animations quand la page est chargée
+        window.addEventListener('load', function() {
+            console.log('Page chargée, démarrage des animations');
+            
+            // Crée encore plus de paillettes (quadruplé par rapport à l'original)
+            confettiInterval = setInterval(createConfetti, 37); // Toutes les 37ms au lieu de 75ms
+            
+            // Arrête les paillettes après 45 secondes
+            setTimeout(() => {
+                clearInterval(confettiInterval);
+            }, 45000);
+
+            // Interaction utilisateur pour débloquer l'audio (politique des navigateurs)
+            document.addEventListener('click', function() {
+                if (player && typeof player.playVideo === 'function') {
+                    player.unMute();
+                    player.setVolume(50);
+                    player.playVideo();
+                }
+            }, { once: true });
+        });
+
+        // Nettoyage quand on quitte la page
+        window.addEventListener('beforeunload', function() {
+            if (confettiInterval) {
+                clearInterval(confettiInterval);
+            }
+            if (player && typeof player.stopVideo === 'function') {
+                player.stopVideo();
+            }
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

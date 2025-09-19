@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="fr">            <form id="registration-form" action="https://formsubmit.co/jennifer.habbouba@gmail.com" method="POST">
+<html lang="fr">                <form id="registration-form" action="https://formsubmit.co/jennifer.habbouba@gmail.com" method="POST">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_subject" value="Nouvelle inscription – Bat‑Mitzvah de Naomi">
-                <input type="hidden" name="_next" value="https://mouglyo.github.io/naomi_bat_mitzvah_site/thanks.html">
-                <input type="hidden" name="_url" value="https://mouglyo.github.io/naomi_bat_mitzvah_site/inscription.html">
+                <div class="form-row">  <form id="registration-form" action="https://formsubmit.co/jennifer.habbouba@gmail.com" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_subject" value="Nouvelle inscription – Bat‑Mitzvah de Naomi">
+                <input type="hidden" name="_autoresponse" value="Merci pour votre inscription ! Nous avons hâte de vous voir à la Bat-Mitzvah de Naomi.">
                 <div class="form-row">>
     <meta charset="UTF-8">
             </section>
@@ -84,6 +87,55 @@
         <p></p>
         <p class="family-name"></p>
     </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registration-form');
+            
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Sauvegarde des données du formulaire
+                    const formData = new FormData(form);
+                    
+                    // Envoi des données à Formsubmit
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        mode: 'no-cors' // Important pour éviter les erreurs CORS
+                    }).then(() => {
+                        // Redirection vers notre page de remerciements
+                        window.location.href = 'thanks.html';
+                    }).catch((error) => {
+                        console.error('Erreur:', error);
+                        // En cas d'erreur, redirection quand même vers la page de remerciements
+                        window.location.href = 'thanks.html';
+                    });
+                });
+            }
+            
+            // Gestion du stockage local (code corrigé avec les bons IDs)
+            const prenomInput = document.getElementById('prenom');
+            const emailInput = document.getElementById('email');
+            
+            if (prenomInput && emailInput) {
+                const savedPrenom = localStorage.getItem('userPrenom');
+                const savedEmail = localStorage.getItem('userEmail');
+                
+                if (savedPrenom) prenomInput.value = savedPrenom;
+                if (savedEmail) emailInput.value = savedEmail;
+                
+                prenomInput.addEventListener('change', () => {
+                    localStorage.setItem('userPrenom', prenomInput.value);
+                });
+                
+                emailInput.addEventListener('change', () => {
+                    localStorage.setItem('userEmail', emailInput.value);
+                });
+            }
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
