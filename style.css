@@ -14,6 +14,7 @@
   --secondary-color: #f5eaf7; /* nuance claire pour les contrastes */
   --text-color: #333333;
   --overlay-color: rgba(142, 68, 173, 0.55); /* voile semi‑transparent */
+  --accent-color: #c39b37; /* couleur dorée pour les accents */
 }
 
 * {
@@ -191,6 +192,26 @@ footer {
   font-size: 0.9rem;
 }
 
+/* Pied de page personnalisé pour la famille */
+.contact-footer {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  position: relative;
+  z-index: 1;
+  font-size: 1rem;
+  color: #7a87a3;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.contact-footer .family-name {
+  margin-top: 0.3rem;
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
 /* Styles spécifiques à la page de remerciements */
 .thanks-container {
   background-color: rgba(255, 255, 255, 0.9);
@@ -222,5 +243,82 @@ footer {
 }
 
 .thanks-container a:hover {
+  background-color: #732d91;
+}
+
+/* === Styles pour la page d’accueil (landing) === */
+.landing-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding-top: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.landing-panel {
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 600px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.landing-panel .name-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  margin: 0;
+  color: var(--accent-color);
+}
+
+.landing-panel .invitation-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin: 0.3rem 0 1rem;
+  color: var(--primary-color);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.landing-panel .event-line {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  margin: 0.2rem 0;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.landing-panel .event-line .icon {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.landing-panel .rsvp {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+  color: #555;
+  font-style: italic;
+}
+
+.cta-button {
+  display: inline-block;
+  margin-top: 1.5rem;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  padding: 0.7rem 2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
   background-color: #732d91;
 }

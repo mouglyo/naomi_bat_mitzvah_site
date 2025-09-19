@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin – Inscriptions Naomi</title>
+    <!--
+      Page confidentielle réservée aux organisateurs. Elle affiche le
+      tableau des inscriptions enregistré dans le stockage local du
+      navigateur. Aucun formulaire n’est visible ici. Pour accéder à
+      cette page, il faut connaître son nom de fichier
+      (adminbatmitsvah.html).
+    -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="audio-wrapper">
+        <iframe id="youtube-player" src="https://www.youtube.com/embed/m-8JfR9_LFA?autoplay=1&mute=1&controls=0&loop=1&playlist=m-8JfR9_LFA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="overlay"></div>
+    <header>
+        <h2>Tableau des inscriptions</h2>
+        <p class="event-details">Vue confidentielle des participations enregistrées</p>
+    </header>
+    <main>
+        <section class="dashboard-section">
+            <table id="registrations-table">
+                <thead>
+                    <tr>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Adultes</th>
+                        <th>Enfants</th>
+                        <th>Régime/Allergies</th>
+                        <th>Message</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Les lignes seront ajoutées via script.js -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer class="contact-footer">
+        <p>Pour toute question, n’hésitez pas à nous contacter.</p>
+        <p class="family-name">Famille Attal</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

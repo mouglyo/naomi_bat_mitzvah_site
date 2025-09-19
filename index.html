@@ -5,128 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bat‑Mitzvah de Naomi</title>
     <!--
-      La structure de cette page web reprend les éléments du faire‑part
-      fourni par l’utilisateur : un message « Save the Date » pour une
-      Bat‑Mitzvah qui aura lieu le 10 novembre 2025 à 19 h à Sèvres.
-      Le site adopte une palette de couleurs violettes conformément à
-      l’instruction et utilise comme image de fond la photographie de
-      Naomi. Un formulaire d’inscription est disponible pour
-      confirmer la présence ; il envoie les données au service
-      formsubmit.co afin de transmettre un courriel à l’adresse
-      jennifer.habbouba@gmail.com sans nécessiter de serveur
-      supplémentaire. Les inscriptions saisies sont également
-      stockées dans le navigateur (localStorage) et affichées dans un
-      tableau de bord simple.
+      Page d’accueil : un panneau d’ouverture élégant inspiré du faire‑part
+      original présente le nom de Naomi, la date et le lieu de la cérémonie.
+      Un bouton permet de passer au formulaire d’inscription.
     -->
     <link rel="stylesheet" href="style.css">
+    <!-- Importation de polices décoratives pour un rendu festif -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!--
-      Lecteur YouTube caché : pour respecter les règles des navigateurs
-      modernes, le lecteur est intégré en mode muet et en boucle. Dès
-      l’ouverture de la page, la musique du lien YouTube fourni se
-      lance automatiquement. Le lecteur est visuellement retiré de la
-      page grâce à une classe CSS.
-    -->
+    <!-- Musique de bienvenue -->
     <div class="audio-wrapper">
         <iframe id="youtube-player" src="https://www.youtube.com/embed/m-8JfR9_LFA?autoplay=1&mute=1&controls=0&loop=1&playlist=m-8JfR9_LFA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
-    <!--
-      Un voile coloré semi‑transparent recouvre l’image de fond pour
-      assurer un bon contraste et une lisibilité optimale des textes.
-    -->
     <div class="overlay"></div>
-    <header>
-        <h1>Save the Date</h1>
-        <h2>Bat‑mitzvah de Naomi</h2>
-        <p class="event-details">
-            Lundi 10 novembre 2025 — 19 h<br>
-            Le Sel · 47 Grande Rue, 92310 Sèvres
-        </p>
-    </header>
-    <main>
-        <!-- Section formulaire -->
-        <section class="form-section">
-            <h3>Formulaire d’inscription</h3>
-            <p>Veuillez remplir tous les champs obligatoires pour confirmer votre présence.</p>
-            <!--
-              Le formulaire est configuré pour envoyer les données au service
-              Formsubmit. Cette solution permet de recevoir automatiquement
-              par courriel les informations des invités sans mettre en
-              place un serveur. Les champs cachés désactivent le captcha,
-              définissent un sujet et demandent un rendu tabulaire du mail.
-              La redirection après soumission renvoie vers la page
-              thanks.html.
-            -->
-            <form id="registration-form" action="https://formsubmit.co/jennifer.habbouba@gmail.com" method="POST">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_subject" value="Nouvelle inscription – Bat‑Mitzvah de Naomi">
-                <input type="hidden" name="_next" value="thanks.html">
-                <div class="form-row">
-                    <div class="form-field">
-                        <label for="prenom">Prénom *</label>
-                        <input type="text" id="prenom" name="Prénom" required placeholder="Votre prénom">
-                    </div>
-                    <div class="form-field">
-                        <label for="nom">Nom *</label>
-                        <input type="text" id="nom" name="Nom" required placeholder="Votre nom">
-                    </div>
-                </div>
-                <div class="form-field">
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" name="Email" required placeholder="votre.email@example.com">
-                </div>
-                <div class="form-field">
-                    <label for="telephone">Téléphone</label>
-                    <input type="tel" id="telephone" name="Téléphone" placeholder="06 12 34 56 78">
-                </div>
-                <div class="form-row">
-                    <div class="form-field">
-                        <label for="adultes">Nombre d’adultes *</label>
-                        <input type="number" id="adultes" name="Nombre d\'adultes" min="1" value="1" required>
-                    </div>
-                    <div class="form-field">
-                        <label for="enfants">Enfants (moins de 12 ans)</label>
-                        <input type="number" id="enfants" name="Enfants (moins de 12 ans)" min="0" value="0">
-                    </div>
-                </div>
-                <div class="form-field">
-                    <label for="regime">Régime alimentaire / Allergies</label>
-                    <input type="text" id="regime" name="Régime alimentaire / Allergies" placeholder="Végétarien, sans gluten, allergies…">
-                </div>
-                <div class="form-field">
-                    <label for="message">Message personnel (optionnel)</label>
-                    <textarea id="message" name="Message personnel" rows="3" placeholder="Un petit mot pour Naomi…"></textarea>
-                </div>
-                <button type="submit" id="submit-button">Confirmer mon inscription</button>
-            </form>
-        </section>
-        <!-- Section tableau de bord -->
-        <section class="dashboard-section">
-            <h3>Tableau des inscriptions</h3>
-            <table id="registrations-table">
-                <thead>
-                    <tr>
-                        <th>Prénom</th>
-                        <th>Nom</th>
-                        <th>Email</th>
-                        <th>Téléphone</th>
-                        <th>Adultes</th>
-                        <th>Enfants</th>
-                        <th>Régime/Allergies</th>
-                        <th>Message</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody id="table-body">
-                    <!-- Les lignes sont insérées dynamiquement par script.js -->
-                </tbody>
-            </table>
-        </section>
+    <main class="landing-container">
+        <div class="landing-panel">
+            <h1 class="name-title">Naomi</h1>
+            <h2 class="invitation-title">Save the Date</h2>
+            <p class="event-line"><span class="icon">📅</span> Lundi 10 novembre 2025</p>
+            <p class="event-line"><span class="icon">🕖</span> 19 h 00</p>
+            <p class="event-line"><span class="icon">📍</span> Le Sel, 47 Grande Rue, 92310 Sèvres</p>
+            <p class="rsvp">Réponse attendue avant le 10 octobre.</p>
+            <a href="inscription.html" class="cta-button">S’inscrire à l’évènement</a>
+        </div>
     </main>
-    <footer>
-        <p>&copy;&nbsp;2025 Bat‑mitzvah de Naomi. Tous droits réservés.</p>
+    <footer class="contact-footer">
+        <p>Pour toute question, n’hésitez pas à nous contacter.</p>
+        <p class="family-name">Famille Attal</p>
     </footer>
     <script src="script.js"></script>
 </body>
