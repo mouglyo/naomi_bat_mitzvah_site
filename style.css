@@ -261,6 +261,16 @@ footer {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.landing-panel .invitation-intro {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  margin: 0 0 0.8rem 0;
+  color: var(--primary-color);
+  text-align: center;
+  font-style: italic;
+  opacity: 0.9;
+}
+
 .landing-panel .invitation-title {
   font-family: 'Playfair Display', serif;
   font-size: 2rem;
@@ -320,6 +330,11 @@ footer {
   .landing-panel {
     padding: 1.5rem;
     margin: 0 0.5rem;
+  }
+  
+  .landing-panel .invitation-intro {
+    font-size: 1rem;
+    margin: 0 0 0.6rem 0;
   }
   
   .landing-panel .invitation-title {
