@@ -1,133 +1,16 @@
 /*
  * Script principal pour le site de la Bat‑Mitzvah de Naomi.
  *
- *  – Chargement des inscriptions de      // Ne pas empêcher l'envoi du form      // Ne pas empêcher l'envoi du form      // Ne pas empêcher l'envoi du formulaire : l'action POST est
-      // nécessaire pour transmettre les données à Formsubmit.
-      // Laisser le navigateur poursuivre le processus d'envoi.
-    });
-  }
-
-  // Contrôle de la musique de fond
-  const audioButton = document.getElementById('audio-toggle');
-  const youtubePlayer = document.getElementById('youtube-player');
-  let isMuted = true; // La vidéo démarre en muet par défaut
-
-  if (audioButton && youtubePlayer) {
-    audioButton.addEventListener('click', () => {
-      if (isMuted) {
-        // Activer le son - remplacer l'URL pour enlever mute=1
-        const currentSrc = youtubePlayer.src;
-        const newSrc = currentSrc.replace('mute=1', 'mute=0');
-        youtubePlayer.src = newSrc;
-        
-        // Changer l'icône pour montrer que le son est activé
-        audioButton.querySelector('.speaker-icon').textContent = '🔊';
-        isMuted = false;
-      } else {
-        // Désactiver le son - remettre mute=1
-        const currentSrc = youtubePlayer.src;
-        const newSrc = currentSrc.replace('mute=0', 'mute=1');
-        youtubePlayer.src = newSrc;
-        
-        // Changer l'icône pour montrer que le son est coupé
-        audioButton.querySelector('.speaker-icon').textContent = '🔇';
-        isMuted = true;
-      }
-    });
-
-    // Initialiser l'état visuel du bouton (muet au démarrage)
-    audioButton.querySelector('.speaker-icon').textContent = '🔇';
-  }
-}); : l'action POST est
-      // nécessaire pour transmettre les données à Formsubmit.
-      // Laisser le navigateur poursuivre le processus d'envoi.
-    });
-  }
-
-  // Contrôle de la musique de fond
-  const audioButton = document.getElementById('audio-toggle');
-  const youtubePlayer = document.getElementById('youtube-player');
-  let isMuted = true; // La vidéo démarre en muet par défaut
-
-  if (audioButton && youtubePlayer) {
-    audioButton.addEventListener('click', () => {
-      if (isMuted) {
-        // Activer le son - remplacer l'URL pour enlever mute=1
-        const currentSrc = youtubePlayer.src;
-        const newSrc = currentSrc.replace('mute=1', 'mute=0');
-        youtubePlayer.src = newSrc;
-        
-        // Changer l'icône pour montrer que le son est activé
-        audioButton.querySelector('.speaker-icon').textContent = '🔊';
-        audioButton.classList.remove('muted');
-        isMuted = false;
-      } else {
-        // Désactiver le son - remettre mute=1
-        const currentSrc = youtubePlayer.src;
-        const newSrc = currentSrc.replace('mute=0', 'mute=1');
-        youtubePlayer.src = newSrc;
-        
-        // Changer l'icône pour montrer que le son est coupé
-        audioButton.querySelector('.speaker-icon').textContent = '🔇';
-        audioButton.classList.add('muted');
-        isMuted = true;
-      }
-    });
-
-    // Initialiser l'état visuel du bouton (muet au démarrage)
-    audioButton.querySelector('.speaker-icon').textContent = '🔇';
-    audioButton.classList.add('muted');
-  }
-}); : l'action POST est
-      // nécessaire pour transmettre les données à Formsubmit.
-      // Laisser le navigateur poursuivre le processus d'envoi.
-    });
-  }
-
-  // Contrôle de la musique de fond
-  const audioButton = document.getElementById('audio-toggle');
-  const youtubePlayer = document.getElementById('youtube-player');
-  let isMuted = true; // La vidéo démarre en muet par défaut
-
-  if (audioButton && youtubePlayer) {
-    audioButton.addEventListener('click', () => {
-      if (isMuted) {
-        // Activer le son - remplacer l'URL pour enlever mute=1
-        const currentSrc = youtubePlayer.src;
-        const newSrc = currentSrc.replace('mute=1', 'mute=0');
-        youtubePlayer.src = newSrc;
-        
-        // Changer l'icône pour montrer que le son est activé
-        audioButton.querySelector('.speaker-icon').textContent = '🔊';
-        audioButton.classList.remove('muted');
-        isMuted = false;
-      } else {
-        // Désactiver le son - remettre mute=1
-        const currentSrc = youtubePlayer.src;
-        const newSrc = currentSrc.replace('mute=0', 'mute=1');
-        youtubePlayer.src = newSrc;
-        
-        // Changer l'icône pour montrer que le son est coupé
-        audioButton.querySelector('.speaker-icon').textContent = '🔇';
-        audioButton.classList.add('muted');
-        isMuted = true;
-      }
-    });
-
-    // Initialiser l'état visuel du bouton
-    audioButton.querySelector('.speaker-icon').textContent = '🔇';
-    audioButton.classList.add('muted');
-  }
-});e stockage local du navigateur
+ *  – Chargement des inscriptions depuis le stockage local du navigateur
  *    et affichage dans le tableau de bord.
- *  – À la soumission du formulaire, enregistrement d’une nouvelle
- *    entrée dans le tableau local avant l’envoi des données par
+ *  – À la soumission du formulaire, enregistrement d'une nouvelle
+ *    entrée dans le tableau local avant l'envoi des données par
  *    Formsubmit.co. Ceci permet de conserver un historique des
  *    inscriptions même sans connexion à un serveur.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Récupère l’élément du formulaire (s’il existe sur la page)
+  // Récupère l'élément du formulaire (s'il existe sur la page)
   const form = document.getElementById('registration-form');
   const tableBody = document.getElementById('table-body');
 
@@ -137,12 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const stored = localStorage.getItem('registrations');
     registrations = stored ? JSON.parse(stored) : [];
   } catch (err) {
-    console.error('Impossible de lire les inscriptions dans localStorage :', err);
+    console.error('Impossible de lire les inscriptions dans localStorage :', err);
     registrations = [];
   }
 
   /**
-   * Met à jour le tableau HTML à partir du tableau d’inscriptions.
+   * Met à jour le tableau HTML à partir du tableau d'inscriptions.
    */
   function renderTable() {
     if (!tableBody) return;
@@ -166,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /**
    * Échappe les caractères HTML pour éviter les injections
-   * potentielles lors de l’affichage dans le tableau.
+   * potentielles lors de l'affichage dans le tableau.
    * @param {string} str
    * @returns {string}
    */
@@ -197,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const message = document.getElementById('message').value.trim();
       const now = new Date();
       const dateLocale = now.toLocaleString('fr-FR');
+      
       // Construit un nouvel enregistrement
       const newReg = {
         prenom,
@@ -209,18 +93,21 @@ document.addEventListener('DOMContentLoaded', () => {
         message,
         date: dateLocale
       };
+      
       // Ajoute au tableau local et enregistre dans localStorage
       registrations.push(newReg);
       try {
         localStorage.setItem('registrations', JSON.stringify(registrations));
       } catch (err) {
-        console.error('Impossible d’enregistrer les inscriptions dans localStorage :', err);
+        console.error('Impossible d\'enregistrer les inscriptions dans localStorage :', err);
       }
-      // Met à jour l’affichage du tableau immédiatement
+      
+      // Met à jour l'affichage du tableau immédiatement
       renderTable();
-      // Ne pas empêcher l’envoi du formulaire : l’action POST est
+      
+      // Ne pas empêcher l'envoi du formulaire : l'action POST est
       // nécessaire pour transmettre les données à Formsubmit.
-      // Laisser le navigateur poursuivre le processus d’envoi.
+      // Laisser le navigateur poursuivre le processus d'envoi.
     });
   }
 });

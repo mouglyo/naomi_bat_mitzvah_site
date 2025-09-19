@@ -1,7 +1,7 @@
 /*
   Feuille de style principale pour le site de la Bat‑Mitzvah de Naomi.
   Une palette violette a été choisie pour rappeler le thème désiré.
-  L’image de fond montre Naomi et est adoucie par un voile coloré
+  L'image de fond montre Naomi et est adoucie par un voile coloré
   semi‑transparent afin de garantir une bonne lisibilité du contenu.
   Les sections sont contenues dans des cartes blanches translucides,
   contrastant avec le fond.
@@ -11,9 +11,8 @@
 
 :root {
   --primary-color: #8e44ad; /* teinte violette principale */
-  --secondary-color: #f5eaf7; /* nuance claire pour les contrastes */
   --text-color: #333333;
-  --overlay-color: rgba(142, 68, 173, 0.7); /* voile semi‑transparent - 50% plus transparent */
+  --overlay-color: rgba(142, 68, 173, 0.7); /* voile semi‑transparent */
   --accent-color: #c39b37; /* couleur dorée pour les accents */
 }
 
@@ -25,7 +24,7 @@ body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   color: var(--text-color);
-  background-image: url('magen_naomi.png');/*photo_naomi.jpeg*/
+  background-image: url('photo_naomi.jpeg');
   background-size: cover;
   background-position: center;
   min-height: 100vh;
@@ -44,14 +43,19 @@ body {
   z-index: 0;
 }
 
-/* Conteneur du lecteur audio, hors de l’écran */
-.audio-wrapper {
-  position: absolute;
-  top: -9999px;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
+/* Texte hébreu בס"ד */
+.hebrew-text {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--primary-color);
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 8px 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 header {
@@ -192,26 +196,6 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Pied de page personnalisé pour la famille */
-.contact-footer {
-  text-align: center;
-  padding: 1.5rem 1rem;
-  position: relative;
-  z-index: 1;
-  font-size: 1rem;
-  color: #7a87a3;
-  background-color: rgba(255, 255, 255, 0.85);
-  border-radius: 8px;
-  max-width: 800px;
-  margin: 2rem auto;
-}
-
-.contact-footer .family-name {
-  margin-top: 0.3rem;
-  color: var(--accent-color);
-  font-weight: 600;
-}
-
 /* Styles spécifiques à la page de remerciements */
 .thanks-container {
   background-color: rgba(255, 255, 255, 0.9);
@@ -246,13 +230,13 @@ footer {
   background-color: #732d91;
 }
 
-/* === Styles pour la page d’accueil (landing) === */
+/* === Styles pour la page d'accueil (landing) === */
 .landing-container {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 80vh;
-  padding-top: 3rem;
+  padding: 3rem 1rem; /* Retour au padding normal */
   position: relative;
   z-index: 1;
 }
@@ -264,10 +248,12 @@ footer {
   text-align: center;
   max-width: 600px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  margin: 0 1rem;
 }
 
 .landing-panel .name-image {
   width: 200px;
+  max-width: 80%; /* Responsive */
   height: auto;
   margin: 0 auto 1rem;
   display: block;
@@ -325,48 +311,34 @@ footer {
   background-color: #732d91;
 }
 
-/* Bouton de contrôle audio */
-.audio-button {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: var(--primary-color);
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(142, 68, 173, 0.3);
-  transition: all 0.3s ease;
-  z-index: 1000;
-}
+/* Media queries pour le responsive design */
+@media (max-width: 768px) {
+  .landing-container {
+    padding: 4rem 0.5rem 2rem; /* Ajusté pour mobile sans bouton audio */
+  }
+  
+  .landing-panel {
+    padding: 1.5rem;
+    margin: 0 0.5rem;
+  }
+  
+  .landing-panel .invitation-title {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+  }
+  .hebrew-text {
+    top: 15px;
+    right: 15px;
+    font-size: 16px;
+    padding: 6px 10px;
+  }
 
-.audio-button:hover {
-  background-color: #732d91;
-  transform: scale(1.1);
-  box-shadow: 0 6px 16px rgba(142, 68, 173, 0.4);
-}
+  .landing-panel .event-line {
+    font-size: 1rem;
+  }
 
-.audio-button .speaker-icon {
-  font-size: 24px;
-  color: white;
-  user-select: none;
-}
-
-/* Texte hébreu בס"ד */
-.hebrew-text {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  font-size: 18px;
-  font-weight: bold;
-  color: var(--primary-color);
-  z-index: 1000;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 8px 12px;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  .cta-button {
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+  }
 }
